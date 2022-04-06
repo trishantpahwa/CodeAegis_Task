@@ -5,6 +5,7 @@ import { SampleActions } from './actions';
 import './App.css'
 
 import { Dashboard, NotFound, Template } from './pages';
+import { Layout } from './pages/common/components';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
 
   return (
     <div className="App">
+      <Layout />
       <Routes>
         <Route exact path="/" element={<Dashboard />} />
         <Route exact path="/templates" element={<Template />} />
