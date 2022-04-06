@@ -1,14 +1,9 @@
-import { useLocation } from 'react-router-dom';
 import SideMenuView from "./sidemenu.view";
 
-export default function SideMenuContainer() {
-
-    const location = useLocation();
-    const activeTile = location.pathname == '/' ? 'Dashboard' : location.pathname[1].toUpperCase() + location.pathname.substring(2);
-
+export default function SideMenuContainer(props) {
     return (
-        <div>
-            <SideMenuView activeTile={activeTile} />
+        <div className="col-start-1 col-span-2">
+            <SideMenuView activeTile={props.activeTile} />
         </div>
     )
 }
