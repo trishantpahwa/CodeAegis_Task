@@ -1,22 +1,28 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { Routes, Route } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import { SampleActions } from './actions';
 import './App.css'
 
+import { Dashboard, NotFound, Template } from './pages';
+
 function App() {
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const ip = useSelector((state) => !!state.sample && state.sample.ip) || '';
+  // const ip = useSelector((state) => !!state.sample && state.sample.ip) || '';
 
-  useEffect(() => {
-    dispatch(SampleActions.sampleAction());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(SampleActions.sampleAction());
+  // }, []);
 
   return (
     <div className="App">
-      <h1>Test</h1>
-      <h2>{ip}</h2>
+      <Routes>
+        <Route exact path="/" element={<Dashboard />} />
+        <Route exact path="/templates" element={<Template />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </div>
   );
 }
