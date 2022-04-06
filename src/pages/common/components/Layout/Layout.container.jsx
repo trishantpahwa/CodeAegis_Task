@@ -1,4 +1,4 @@
-import LayoutView from "./Layout.view";
+import LayoutView from "./layout.view";
 
 export default function LayoutContainer() {
     return (
