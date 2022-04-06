@@ -1,28 +1,35 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
-import { useEffect, useState, useRef } from 'react';
-import { SampleActions } from './actions';
 import './App.css'
 
-import { Dashboard, NotFound, Template } from './pages';
+import {
+  Accounting, 
+  Activity,
+  Calender,
+  Clients,
+  Contacts,
+  Dashboard,
+  NotFound,
+  Reports,
+  Settings,
+  Template
+} from './pages';
 import { Layout } from './pages/common/components';
 
 function App() {
-
-  // const dispatch = useDispatch();
-
-  // const ip = useSelector((state) => !!state.sample && state.sample.ip) || '';
-
-  // useEffect(() => {
-  //   dispatch(SampleActions.sampleAction());
-  // }, []);
 
   return (
     <div className="App">
       <Layout />
       <Routes>
         <Route exact path="/" element={<Dashboard />} />
-        <Route exact path="/templates" element={<Template />} />
+        <Route exact path="/contacts" element={<Contacts />} />
+        <Route exact path="/calender" element={<Calender />} />
+        <Route exact path="/clients" element={<Clients />} />
+        <Route exact path="/template" element={<Template />} />
+        <Route exact path="/accounting" element={<Accounting />} />
+        <Route exact path="/activity" element={<Activity />} />
+        <Route exact path="/reports" element={<Reports />} />
+        <Route exact path="/settings" element={<Settings />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
