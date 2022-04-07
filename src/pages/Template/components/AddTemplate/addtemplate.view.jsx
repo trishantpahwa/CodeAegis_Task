@@ -17,6 +17,9 @@ export default function AddTemplateView(props) {
                         </div>
                         <div className="text-left w-full mt-2">
                             <select className="w-5/6 border-gray-200 rounded-md p-1 border-2">
+                                <option value="TEAM">TEAM</option>
+                                <option value="DRAFT">DRAFT</option>
+                                <option value="PUBLISHED">PUBLISHED</option>
                             </select>
                         </div>
                     </div>
