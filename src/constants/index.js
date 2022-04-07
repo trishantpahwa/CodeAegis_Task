@@ -1,5 +1,7 @@
-import SampleConstants from './sample.constants';
+import TemplateConstants from './template.constants';
+import UserConstants from './user.constants';
 
 export {
-    SampleConstants
+    TemplateConstants,
+    UserConstants
 };

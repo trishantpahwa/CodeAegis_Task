@@ -1,5 +1,7 @@
-import SampleActions from './sample.actions';
+import TemplateActions from './template.actions';
+import UserActions from './user.actions';
 
 export {
-    SampleActions
+    TemplateActions,
+    UserActions
 };

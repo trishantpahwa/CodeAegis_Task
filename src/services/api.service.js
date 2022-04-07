@@ -1,12 +1,12 @@
 import axios from 'axios';
 import SessionService from './session.service';
 
-axios.defaults.baseURL = ''//process.env.REACT_APP_API_BASE_URL;
+axios.defaults.baseURL = 'http://18.223.39.152:3000/'//process.env.REACT_APP_API_BASE_URL;
 axios.interceptors.request.use((config) => {
     const innerConfig = config;
     const token = SessionService.get('user-token');
     if (token) {
-        innerConfig.headers.Authorization = `Bearer ${token}`;
+        innerConfig.headers.access_token = token;
     }
     return innerConfig;
 });

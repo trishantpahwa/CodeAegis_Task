@@ -13,15 +13,21 @@ export default function SideMenuView(props) {
         'Reports',
         'Settings',
     ];
-    
+
     return (
-        <div className="w-60 h-full shadow-md bg-white px-1 absolute">
-            <img src={`assets/logo.png`} />
-            <ul className="relative">
-                {tiles.map((tile, index) => (
-                    <MenuTile key={index} type={tile} active={tile === props.activeTile} />
-                ))}
-            </ul>
+        <div className="w-60 h-full shadow-md bg-white px-1 absolute flex flex-col justify-between">
+            <div>
+                <img src={`assets/logo.png`} className="w-full" />
+                <ul className="relative">
+                    {tiles.map((tile, index) => (
+                        <MenuTile key={index} type={tile} active={tile === props.activeTile} />
+                    ))}
+                </ul>
+            </div>
+            <div className="flex justify-between p-6">
+                <button className="bg-gray-200 rounded-full w-20 h-9">Support</button>
+                <button className="bg-gray-200 rounded-full w-20 h-9">Logout</button>
+            </div>
         </div>
     )
 }

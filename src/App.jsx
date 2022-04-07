@@ -1,8 +1,10 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import './App.css'
 
 import {
-  Accounting, 
+  Accounting,
   Activity,
   Calender,
   Clients,
@@ -13,9 +15,16 @@ import {
   Settings,
   Template
 } from './pages';
+import { UserActions } from './actions';
 import { Layout } from './pages/common/components';
 
 function App() {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(UserActions.isLoggedIn());
+  }, []);
 
   return (
     <div className="App">

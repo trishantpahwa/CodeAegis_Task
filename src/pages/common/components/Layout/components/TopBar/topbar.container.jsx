@@ -16,7 +16,7 @@ export default function TopBarContainer(props) {
     };
 
     return (
-        <div className="background ml-3 col-start-3 col-span-10">
+        <div className="relative background ml-3 col-start-3 col-span-10">
             <TopBarView heading={texts[props.text]} />
         </div>
     );

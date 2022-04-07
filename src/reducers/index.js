@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import sample from './sample.reducer';
+import template from './template.reducer';
+import user from './user.reducer';
 
 export default combineReducers({
-    sample
+    template,
+    user
 });
