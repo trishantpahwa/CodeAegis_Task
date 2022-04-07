@@ -8,7 +8,7 @@ export default function AddTemplateView(props) {
                             Add Name
                         </div>
                         <div className="text-left w-full mt-1">
-                            <input type="text" placeholder="Name" className="w-5/6 border-gray-200 rounded-md p-1 border-2" />
+                            <input name="name" onChange={props.onUpdate} type="text" placeholder="Name" className="w-5/6 border-gray-200 rounded-md p-1 border-2" />
                         </div>
                     </div>
                     <div className="w-5/6 flex flex-col">
@@ -16,7 +16,7 @@ export default function AddTemplateView(props) {
                             Publish to Team
                         </div>
                         <div className="text-left w-full mt-2">
-                            <select className="w-5/6 border-gray-200 rounded-md p-1 border-2">
+                            <select name="published_to" onChange={props.onUpdate} className="w-5/6 border-gray-200 rounded-md p-1 border-2">
                                 <option value="TEAM">TEAM</option>
                                 <option value="DRAFT">DRAFT</option>
                                 <option value="PUBLISHED">PUBLISHED</option>
@@ -28,9 +28,10 @@ export default function AddTemplateView(props) {
                             Upload Word File
                         </div>
                         <div className="text-left w-full mt-2 flex">
-                            <div className="w-5/6 h-20 border-2 border-dashed border-teal-500 flex">
+                            <div onClick={props.uploadWordDoc} className="w-5/6 h-20 border-2 border-dashed border-teal-500 flex">
                                 <img src="/assets/upload_icon.png" className="h-14 mt-2 ml-4" />
                                 <p className="mt-6 ml-3 text-sm">Please select or drag and drop image.</p>
+                                <input type="file" className="hidden" name="word-file" onChange={props.uploadDoc} ref={props.inputWordDocRef} />
                             </div>
                         </div>
                     </div>
@@ -39,12 +40,12 @@ export default function AddTemplateView(props) {
                             Menu of Services
                         </div>
                         <div className="text-left w-5/6 mt-2 flex flex-col">
-                            <div className="flex">
-                                <input type="text" placeholder="Price (Do it yourself)" className="w-full border-gray-200 rounded-md p-1 border-2" />
-                                <input type="text" placeholder="Price (Do it together)" className="w-full border-gray-200 rounded-md p-1 border-2" />
+                            <div className="flex justify-between">
+                                <input type="text" name="price" onChange={props.onUpdate} placeholder="Price (Do it yourself)" className="w-full border-gray-200 rounded-md p-1 border-2 mr-1" />
+                                <input type="text" name="sign_fee" onChange={props.onUpdate} placeholder="Price (Do it together)" className="w-full border-gray-200 rounded-md p-1 border-2 ml-1" />
                             </div>
                             <div className="mt-2">
-                                <input type="text" placeholder="Description" className="w-full border-gray-200 rounded-md p-1 border-2" />
+                                <input type="text" name="description" onChange={props.onUpdate} placeholder="Description" className="w-full border-gray-200 rounded-md p-1 border-2" />
                             </div>
                         </div>
                     </div>

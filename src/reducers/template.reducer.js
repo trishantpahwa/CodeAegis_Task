@@ -18,6 +18,20 @@ export default (state = initialState, action) => {
         case TemplateConstants.GET_ALL_USER_TEMPLATES_FAILURE:
             return { ...state };
 
+        case TemplateConstants.UPLOAD_WORD_DOC_REQUEST:
+            return { ...state };
+        case TemplateConstants.UPLOAD_WORD_DOC_SUCCESS:
+            return { ...state };
+        case TemplateConstants.UPLOAD_WORD_DOC_FAILURE:
+            return { ...state };
+
+        case TemplateConstants.SAVE_TEMPLATE_REQUEST:
+            return { ...state };
+        case TemplateConstants.SAVE_TEMPLATE_SUCCESS:
+            return { ...state };
+        case TemplateConstants.SAVE_TEMPLATE_FAILURE:
+            return { ...state };
+
         default:
             return state;
     }

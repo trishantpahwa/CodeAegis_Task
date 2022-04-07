@@ -25,9 +25,40 @@ const TemplateActions = {
         return async (dispatch) => {
             dispatch(request());
             const response = await TemplateService.getAllUserTemplates();
-            console.log(response)
             if (response && response.message === 'Success') {
                 dispatch(success(response.user));
+            } else {
+                dispatch(failure());
+            }
+        };
+    },
+    uploadWordDoc: (form) => {
+        const request = () => ({ type: TemplateConstants.UPLOAD_WORD_DOC_REQUEST });
+        const success = () => ({ type: TemplateConstants.UPLOAD_WORD_DOC_SUCCESS });
+        const failure = () => ({ type: TemplateConstants.UPLOAD_WORD_DOC_FAILURE });
+
+        return async (dispatch) => {
+            dispatch(request());
+            const response = await TemplateService.uploadWordDoc(form);
+            if (response) {
+                dispatch(success());
+                return response.path;
+            } else {
+                dispatch(failure());
+                return false;
+            }
+        };
+    },
+    saveTemplate: (template) => {
+        const request = () => ({ type: TemplateConstants.SAVE_TEMPLATE_REQUEST });
+        const success = () => ({ type: TemplateConstants.SAVE_TEMPLATE_SUCCESS });
+        const failure = () => ({ type: TemplateConstants.SAVE_TEMPLATE_FAILURE });
+
+        return async (dispatch) => {
+            dispatch(request());
+            const response = await TemplateService.saveTemplate(template);
+            if (response) {
+                dispatch(success());
             } else {
                 dispatch(failure());
             }
