@@ -41,7 +41,7 @@ export default function AddTemplateContainer(props) {
         setQuestionnairePrompt(false);
     }
 
-    const onAddNow = (data) => {
+    const onAddNow = () => {
         setQuestionnairePrompt(false);
         setAddQuestionnaireVisible(true);
     }
