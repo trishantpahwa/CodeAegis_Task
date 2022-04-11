@@ -63,6 +63,36 @@ const TemplateActions = {
                 dispatch(failure());
             }
         };
+    },
+    updateTemplate: (template) => {
+        const request = () => ({ type: TemplateConstants.SAVE_TEMPLATE_REQUEST });
+        const success = () => ({ type: TemplateConstants.SAVE_TEMPLATE_SUCCESS });
+        const failure = () => ({ type: TemplateConstants.SAVE_TEMPLATE_FAILURE });
+
+        return async (dispatch) => {
+            dispatch(request());
+            const response = await TemplateService.updateTemplate(template);
+            if (response) {
+                dispatch(success());
+            } else {
+                dispatch(failure());
+            }
+        };
+    },
+    getQuestionnaireCategories: () => {
+        const request = () => ({ type: TemplateConstants.GET_QUESTIONNAIRE_CATEGORIES_REQUEST });
+        const success = (categories) => ({ type: TemplateConstants.GET_QUESTIONNAIRE_CATEGORIES_SUCCESS, categories });
+        const failure = () => ({ type: TemplateConstants.GET_QUESTIONNAIRE_CATEGORIES_FAILURE });
+
+        return async (dispatch) => {
+            dispatch(request());
+            const response = await TemplateService.getQuestionnaireCategories();
+            if (response) {
+                dispatch(success(response.user));
+            } else {
+                dispatch(failure());
+            }
+        };
     }
 };
 

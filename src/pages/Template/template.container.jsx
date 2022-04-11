@@ -12,6 +12,7 @@ export default function TemplateContainer() {
 
     const [addTemplate, setAddTemplate] = useState(false);
     const [editTemplate, setEditTemplate] = useState(null);
+    const [editQuestionnaire, setEditQuestionnaire] = useState(null);
 
     useEffect(() => {
         dispatch(TemplateActions.getAllAdminTemplates());
@@ -30,6 +31,18 @@ export default function TemplateContainer() {
         setEditTemplate(template);
     }
 
+    function cancelEditTemplate(template) {
+        setEditTemplate(false);
+    }
+
+    function onClickQuestionnaireEdit(template) {
+        setEditQuestionnaire(template);
+    }
+
+    function cancelEditQuestionnaire() {
+        setEditQuestionnaire(false);
+    }
+
     return (
         <div className="ml-60 relative">
             <TemplateView
@@ -40,6 +53,10 @@ export default function TemplateContainer() {
                 addTemplate={addTemplate}
                 onClickTile={onClickTile}
                 editTemplate={editTemplate}
+                cancelEditTemplate={cancelEditTemplate}
+                onClickQuestionnaireEdit={onClickQuestionnaireEdit}
+                cancelEditQuestionnaire={cancelEditQuestionnaire}
+                editQuestionnaire={editQuestionnaire}
             />
         </div>
     )

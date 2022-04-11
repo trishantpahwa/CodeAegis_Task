@@ -1,9 +1,10 @@
-import { SideMenu } from './components';
+import { SideMenu, TopBar } from './components';
 
-export default function LayoutView() {
+export default function LayoutView(props) {
     return (
-        <div>
-            <SideMenu />
+        <div className="grid grid-cols-12">
+            <SideMenu activeTile={props.active} />
+            <TopBar text={props.active} />
         </div>
     )
 }
