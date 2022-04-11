@@ -8,6 +8,7 @@ const TemplateService = {
     updateTemplate: async (data) => await ApiService.post('/user/update_template', data),
     getQuestionnaireCategories: async () => await ApiService.get('/admin/get_categories'),
     getQuestionnaireFromTemplate: async (data) => await ApiService.post('/user/get_sections', data),
+    saveQuestionnaire: async (data) => await ApiService.post('/user/add_section', data)
     // test: async () =>  await ApiService.get('https://api64.ipify.org?format=json'),
 };
 

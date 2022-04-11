@@ -33,8 +33,8 @@ export default function AddTemplateContainer(props) {
         });
     }
 
-    const onSave = () => {
-        const _templateID = dispatch(TemplateActions.saveTemplate(form));
+    const onSave = async () => {
+        const _templateID = await dispatch(TemplateActions.saveTemplate(form));
         setTemplateID(_templateID);
         setQuestionnairePrompt(true);
     }
@@ -46,10 +46,6 @@ export default function AddTemplateContainer(props) {
     const onAddNow = () => {
         setQuestionnairePrompt(false);
         setAddQuestionnaireVisible(true);
-    }
-
-    const onQuestionnaireSave = () => {
-        window.location = '/template';
     }
 
     const onDelete = () => {
@@ -79,7 +75,6 @@ export default function AddTemplateContainer(props) {
             {addQuestionnaireVisible ?
                 <AddQuestionnaire
                     templateID={templateID}
-                    onSave={onQuestionnaireSave}
                     onDelete={onDelete}
                 />
                 :

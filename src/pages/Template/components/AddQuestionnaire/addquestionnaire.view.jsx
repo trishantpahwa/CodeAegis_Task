@@ -3,10 +3,17 @@ export default function AddQuestionnaireView(props) {
         <div>
             <div className="flex justify-around">
                 <div className="bg-white rounded-sm w-1/4">
-                    <div className="text-left text-gray-400 text-md mt-5 ml-5">
-                        Unnamed questions
-                    </div>
-                    <div className="text-left text-md text-teal-500 ml-5 mt-3 font-medium">
+                    <ul className="list-none text-left p-3">
+                        {props.questionnaires.map((question, index) => (
+                            <li key={index}>
+                                <button onClick={() => props.selectQuestion(question)}>
+                                    {question.name}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                    {props.questionnaires.length === 0 ? <div>Unnamed Section</div> : null}
+                    <div className="text-teal-500 text-lg">
                         + Add Section
                     </div>
                 </div>
@@ -20,7 +27,7 @@ export default function AddQuestionnaireView(props) {
                         </div>
                         <div className="flex">
                             <div className="w-full">
-                                <input type="text" placeholder="Enter Title" className="mt-2 border-2 border-gray w-full rounded-sm" />
+                                <input name="name" onChange={props.handleQuestionChange} type="text" placeholder="Enter Title" className="mt-2 border-2 border-gray w-full rounded-sm" />
                             </div>
                             <div>
                                 <button className="border-2 border-red-300 h-7 w-7 flex justify-center mt-2 ml-2 rounded-sm">
@@ -29,23 +36,23 @@ export default function AddQuestionnaireView(props) {
                             </div>
                         </div>
                         <div className="mt-2">
-                        <div className="flex mt-4 mb-4">
+                            <div className="flex mt-4 mb-4">
                                 <p className="text-2xl">Type Question</p>
                                 <p className="text-2xl ml-1 -mt-1 text-red-500">*</p>
                             </div>
                             <div className="flex flex-col text-left">
-                                {props.typeQuestions.length > 0 ? props.typeQuestions.map((typeQuestion) => (
-                                    <div className="flex flex-col border-gray-200 roudned-md border-2 p-5 mb-4">
+                                {props.typeQuestions.length > 0 ? props.typeQuestions.map((typeQuestion, index) => (
+                                    <div className="flex flex-col border-gray-200 roudned-md border-2 p-5 mb-4" key={index}>
                                         <div className="-mt-2 text-xl">
                                             {typeQuestion.name}
                                         </div>
-                                        <input className="text-md border-2 border-gray-200 mt-2 rounded-sm h-12 indent-2" type="text" name="question" placeholder="Question" />
-                                        <input className="text-md border-2 border-gray-200 mt-2 rounded-sm h-12 indent-2" type="text" name="id" placeholder="ID*" />
+                                        <input className="text-md border-2 border-gray-200 mt-2 rounded-sm h-12 indent-2" type="text" placeholder="Question" onChange={props.handleQuestionChange} name={"question_value-" + index.toString()} defaultValue={typeQuestion.question_value} />
+                                        <input className="text-md border-2 border-gray-200 mt-2 rounded-sm h-12 indent-2" type="text" defaultValue={typeQuestion.id_val} onChange={props.handleQuestionChange} name={"id_val-" + index.toString()} placeholder="ID*" />
                                         <div className="text-xs text-gray-500">An ID to reference the answer in the template</div>
                                         <div className="text-sm text-red-500 text-normal mt-1">Id Must be Unique</div>
-                                        <input className="text-md border-2 border-gray-200 mt-2 rounded-sm h-12 indent-2 mt-4" type="text" name="helper" placeholder="Helper" />
+                                        <input defaultValue={typeQuestion.helper_value} onChange={props.handleQuestionChange} name={"helper_value-" + index.toString()} className="text-md border-2 border-gray-200 mt-2 rounded-sm h-12 indent-2 mt-4" type="text" placeholder="Helper" />
                                         <div className="text-sm mt-3">
-                                            <input className="mr-2" type="checkbox" />
+                                            <input name={"isRequired-" + index.toString()} onChange={props.handleQuestionChange} defaultValue={typeQuestion.isRequired} className="mr-2" type="checkbox" />
                                             Required
                                         </div>
                                     </div>

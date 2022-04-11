@@ -46,6 +46,13 @@ export default (state = initialState, action) => {
         case TemplateConstants.GET_QUESTIONNAIRE_FROM_TEMPLATE_FAILURE:
             return { ...state };
 
+        case TemplateConstants.SAVE_QUESTIONNAIRE_REQUEST:
+            return { ...state };
+        case TemplateConstants.SAVE_QUESTIONNAIRE_SUCCESS:
+            return { ...state };
+        case TemplateConstants.SAVE_QUESTIONNAIRE_FAILURE:
+            return { ...state };
+
         default:
             return state;
     }
