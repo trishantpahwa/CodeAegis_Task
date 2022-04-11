@@ -8,7 +8,13 @@ export default function AddTemplateView(props) {
                             Add Name
                         </div>
                         <div className="text-left w-full mt-1">
-                            <input name="name" onChange={props.onUpdate} type="text" placeholder="Name" className="w-5/6 border-gray-200 rounded-md p-1 border-2" />
+                            <input name="name" onChange={props.onUpdate} type="text" placeholder="Name" className={`w-5/6 ${props.formErrors.includes('name cannot be empty') ? 'border-red-500' : 'border-gray-200'} rounded-md p-1 border-2`} />
+                            {
+                                props.formErrors.includes('name cannot be empty') ?
+                                    (<div className="text-sm text-red-500">Name cannot be empty.</div>)
+                                    :
+                                    null
+                            }
                         </div>
                     </div>
                     <div className="w-5/6 flex flex-col">
@@ -41,8 +47,22 @@ export default function AddTemplateView(props) {
                         </div>
                         <div className="text-left w-5/6 mt-2 flex flex-col">
                             <div className="flex justify-between">
-                                <input type="text" name="price" onChange={props.onUpdate} placeholder="Price (Do it yourself)" className="w-full border-gray-200 rounded-md p-1 border-2 mr-1" />
-                                <input type="text" name="sign_fee" onChange={props.onUpdate} placeholder="Price (Do it together)" className="w-full border-gray-200 rounded-md p-1 border-2 ml-1" />
+                                <input type="number" name="price" onChange={props.onUpdate} placeholder="Price (Do it yourself)" className={`w-full border-gray-200 rounded-md p-1 border-2 mr-1 ${props.formErrors.includes('price cannot be empty') ? 'border-red-500' : 'border-gray-200'}`} />
+                                <input type="number" name="sign_fee" onChange={props.onUpdate} placeholder="Price (Do it together)" className={`w-full border-gray-200 rounded-md p-1 border-2 ml-1 ${props.formErrors.includes('sign_fee cannot be empty') ? 'border-red-500' : 'border-gray-200'}`} />
+                            </div>
+                            <div className="flex flex-col">
+                                {
+                                    props.formErrors.includes('price cannot be empty') ?
+                                        (<div className="text-sm text-red-500">Price cannot be empty.</div>)
+                                        :
+                                        null
+                                }
+                                {
+                                    props.formErrors.includes('sign_fee cannot be empty') ?
+                                        (<div className="text-sm text-red-500">Sign fee cannot be empty.</div>)
+                                        :
+                                        null
+                                }
                             </div>
                             <div className="mt-2">
                                 <input type="text" name="description" onChange={props.onUpdate} placeholder="Description" className="w-full border-gray-200 rounded-md p-1 border-2" />
