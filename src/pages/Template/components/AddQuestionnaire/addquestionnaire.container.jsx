@@ -60,7 +60,15 @@ export default function AddQuestionnaireContainer(props) {
 
     const onSave = () => {
         dispatch(TemplateActions.saveQuestionnaire(question));
-        window.location = '/template';
+        dispatch(TemplateActions.getQuestionnaireFromTemplate(props.templateID));
+    }
+
+    const addSection = () => {
+        setQuestion({
+            name: "",
+            question: [],
+            template_id: props.templateID,
+        });
     }
 
     useEffect(() => {
@@ -82,6 +90,7 @@ export default function AddQuestionnaireContainer(props) {
                 selectQuestion={selectQuestion}
                 question={question}
                 handleQuestionChange={handleQuestionChange}
+                addSection={addSection}
             />
         </div>
     )

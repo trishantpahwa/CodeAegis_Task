@@ -13,7 +13,7 @@ export default function AddQuestionnaireView(props) {
                         ))}
                     </ul>
                     {props.questionnaires.length === 0 ? <div>Unnamed Section</div> : null}
-                    <div className="text-teal-500 text-lg">
+                    <div className="text-teal-500 text-lg cursor-pointer" onClick={props.addSection}>
                         + Add Section
                     </div>
                 </div>
@@ -27,7 +27,7 @@ export default function AddQuestionnaireView(props) {
                         </div>
                         <div className="flex">
                             <div className="w-full">
-                                <input name="name" onChange={props.handleQuestionChange} type="text" placeholder="Enter Title" className="mt-2 border-2 border-gray w-full rounded-sm" defaultValue={props.question.name} />
+                                <input name="name" onChange={props.handleQuestionChange} type="text" placeholder="Enter Title" className="mt-2 border-2 border-gray w-full rounded-sm" value={props.question.name} />
                             </div>
                             <div>
                                 <button className="border-2 border-red-300 h-7 w-7 flex justify-center mt-2 ml-2 rounded-sm">

@@ -61,10 +61,18 @@ export default function EditQuestionnaireConatainer(props) {
         setTypeQuestions(_question.question);
     }
 
+    const addSection = () => {
+        setQuestion({
+            name: "",
+            question: [],
+            template_id: props.template._id
+        });
+    }
+
     const onSave = async () => {
         if (question.section_id) await dispatch(TemplateActions.updateQuestionnaire(question));
         else await dispatch(TemplateActions.saveQuestionnaire(question));
-        window.location = '/template';
+        await dispatch(TemplateActions.getQuestionnaireFromTemplate(props.template._id));
     }
 
     useEffect(() => {
@@ -86,6 +94,7 @@ export default function EditQuestionnaireConatainer(props) {
                 question={question}
                 onSave={onSave}
                 handleQuestionChange={handleQuestionChange}
+                addSection={addSection}
             />
         </div>
     )
