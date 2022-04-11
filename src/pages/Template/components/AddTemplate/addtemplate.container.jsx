@@ -12,6 +12,7 @@ export default function AddTemplateContainer(props) {
 
     const [questionnairePrompt, setQuestionnairePrompt] = useState(false);
     const [addQuestionnaireVisible, setAddQuestionnaireVisible] = useState(false);
+    const [templateID, setTemplateID] = useState(null);
 
     const [form, setForm] = useState({
         "name": "",
@@ -33,7 +34,8 @@ export default function AddTemplateContainer(props) {
     }
 
     const onSave = () => {
-        dispatch(TemplateActions.saveTemplate(form));
+        const _templateID = dispatch(TemplateActions.saveTemplate(form));
+        setTemplateID(_templateID);
         setQuestionnairePrompt(true);
     }
 
@@ -76,6 +78,7 @@ export default function AddTemplateContainer(props) {
             }
             {addQuestionnaireVisible ?
                 <AddQuestionnaire
+                    templateID={templateID}
                     onSave={onQuestionnaireSave}
                     onDelete={onDelete}
                 />

@@ -39,6 +39,13 @@ export default (state = initialState, action) => {
         case TemplateConstants.GET_QUESTIONNAIRE_CATEGORIES_FAILURE:
             return { ...state };
 
+        case TemplateConstants.GET_QUESTIONNAIRE_FROM_TEMPLATE_REQUEST:
+            return { ...state };
+        case TemplateConstants.GET_QUESTIONNAIRE_FROM_TEMPLATE_SUCCESS:
+            return { ...state, templates: { ...state.templates, questionnaires: { ...state.templates.questionnaires, [action.template]: action.questionnaire } } };
+        case TemplateConstants.GET_QUESTIONNAIRE_FROM_TEMPLATE_FAILURE:
+            return { ...state };
+
         default:
             return state;
     }

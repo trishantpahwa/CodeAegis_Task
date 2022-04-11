@@ -8,20 +8,42 @@ export default function EditQuestionnaireConatainer(props) {
     const dispatch = useDispatch();
 
     const categories = useSelector((state) => !!state && !!state.template && !!state.template.templates && !!state.template.templates.categories && state.template.templates.categories);
+    const questionnaires = useSelector((state) => !!state && !!state.template && !!state.template.templates && !!state.template.templates.questionnaires && !!state.template.templates.questionnaires[props.template._id] && state.template.templates.questionnaires[props.template._id]) || [];
 
     const [selectingCategory, setSelectingCategory] = useState(false);
     const [typeQuestions, setTypeQuestions] = useState([]);
+    const [question, setQuestion] = useState({
+        name: "",
+        question: [],
+        template_id: "",
+        _id: ""
+    });
 
     const onSelectCategory = () => {
         setSelectingCategory(_selectingCategory => !_selectingCategory);
     }
 
     const selectTypeQuestionsCategory = (category) => {
-        setTypeQuestions(_typeQuestions => [..._typeQuestions, category])
+        setTypeQuestions(_typeQuestions => [..._typeQuestions, { category_id: category.category_id, id_val: '', isRequired: false, question_value: '', _id: '' }])
+    }
+
+    const selectQuestion = (_question) => {
+        _question.question.map(_q => {
+            const _c = categories.filter(c => c._id === _q.category_id)[0];
+            _q.name = _c.name
+        })
+        setQuestion({
+            name: _question.name,
+            question: _question.question,
+            template_id: _question.template_id,
+            _id: _question._id
+        });
+        setTypeQuestions(_question.question);
     }
 
     useEffect(() => {
         dispatch(TemplateActions.getQuestionnaireCategories());
+        dispatch(TemplateActions.getQuestionnaireFromTemplate(props.template._id));
     }, []);
 
     return (
@@ -33,6 +55,9 @@ export default function EditQuestionnaireConatainer(props) {
                 categories={categories}
                 selectTypeQuestionsCategory={selectTypeQuestionsCategory}
                 typeQuestions={typeQuestions}
+                questionnaires={questionnaires}
+                selectQuestion={selectQuestion}
+                question={question}
             />
         </div>
     )

@@ -59,8 +59,10 @@ const TemplateActions = {
             const response = await TemplateService.saveTemplate(template);
             if (response) {
                 dispatch(success());
+                return response.user._id;
             } else {
                 dispatch(failure());
+                return null;
             }
         };
     },
@@ -89,6 +91,21 @@ const TemplateActions = {
             const response = await TemplateService.getQuestionnaireCategories();
             if (response) {
                 dispatch(success(response.user));
+            } else {
+                dispatch(failure());
+            }
+        };
+    },
+    getQuestionnaireFromTemplate: (template) => {
+        const request = () => ({ type: TemplateConstants.GET_QUESTIONNAIRE_FROM_TEMPLATE_REQUEST });
+        const success = (template, questionnaire) => ({ type: TemplateConstants.GET_QUESTIONNAIRE_FROM_TEMPLATE_SUCCESS, template, questionnaire });
+        const failure = () => ({ type: TemplateConstants.GET_QUESTIONNAIRE_FROM_TEMPLATE_FAILURE });
+
+        return async (dispatch) => {
+            dispatch(request());
+            const response = await TemplateService.getQuestionnaireFromTemplate({ template_id: template });
+            if (response) {
+                dispatch(success(template, response.user));
             } else {
                 dispatch(failure());
             }

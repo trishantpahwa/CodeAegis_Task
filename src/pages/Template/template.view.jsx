@@ -10,6 +10,7 @@ export default function TemplateView(props) {
                 props.editQuestionnaire ?
                     (<EditQuestionnaire
                         cancelEditQuestionnaire={props.cancelEditQuestionnaire}
+                        template={props.editTemplate}
                     />)
                     :
                     (<EditTemplate

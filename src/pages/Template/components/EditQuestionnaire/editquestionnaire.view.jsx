@@ -8,13 +8,17 @@ export default function EditQuestionnaireView(props) {
             </div>
             <div className="flex ml-6 h-full basis-0">
                 <div className="h-full w-1/5 mt-7 bg-white font-semibold text-lg flex flex-col">
-                    <div className="mt-4">
-                        <div>Unnamed Section</div>
-                    </div>
-                    <div className="mt-4">
-                        <button className="bg-teal-500 text-white rounded-md p-1 w-4/6">Save changes</button>
-                    </div>
-                    <div className="text-teal-500 text-lg mt-4">
+                    <ul className="list-none text-left p-3">
+                        {props.questionnaires.map((question, index) => (
+                            <li key={index}>
+                                <button onClick={() => props.selectQuestion(question)}>
+                                    {question.name}
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                    {props.questionnaires.length === 0 ? <div>Unnamed Section</div> : null}
+                    <div className="text-teal-500 text-lg">
                         + Add Section
                     </div>
                 </div>
@@ -29,7 +33,7 @@ export default function EditQuestionnaireView(props) {
                                 <p className="text-xl ml-1 -mt-1 text-red-500">*</p>
                             </div>
                             <div className="flex">
-                                <input className="w-4/5 border-2 border-gray h-10 mt-2 indent-2" type="text" placeholder="Enter Title" />
+                                <input defaultValue={props.question.name} className="w-4/5 border-2 border-gray h-10 mt-2 indent-2" type="text" placeholder="Enter Title" />
                                 <img className="h-10 ml-2 mt-2 border-2 border-red-500" src="https://freepikpsd.com/file/2020/12/delete-symbol-png-7.png" />
                             </div>
                             <div className="flex mt-4 mb-4">
@@ -37,16 +41,16 @@ export default function EditQuestionnaireView(props) {
                                 <p className="text-2xl ml-1 -mt-1 text-red-500">*</p>
                             </div>
                             <div className="flex flex-col text-left">
-                                {props.typeQuestions.length > 0 ? props.typeQuestions.map((typeQuestion) => (
-                                    <div className="flex flex-col border-gray-200 roudned-md border-2 p-5 mb-4">
+                                {props.typeQuestions.length > 0 ? props.typeQuestions.map((typeQuestion, index) => (
+                                    <div className="flex flex-col border-gray-200 roudned-md border-2 p-5 mb-4" key={index}>
                                         <div className="-mt-2 text-xl">
                                             {typeQuestion.name}
                                         </div>
-                                        <input className="text-md border-2 border-gray-200 mt-2 rounded-sm h-12 indent-2" type="text" name="question" placeholder="Question" />
-                                        <input className="text-md border-2 border-gray-200 mt-2 rounded-sm h-12 indent-2" type="text" name="id" placeholder="ID*" />
+                                        <input className="text-md border-2 border-gray-200 mt-2 rounded-sm h-12 indent-2" type="text" name="question" placeholder="Question" defaultValue={typeQuestion.question_value} />
+                                        <input className="text-md border-2 border-gray-200 mt-2 rounded-sm h-12 indent-2" type="text" defaultValue={typeQuestion.id_value} name="id" placeholder="ID*" />
                                         <div className="text-xs text-gray-500">An ID to reference the answer in the template</div>
                                         <div className="text-sm text-red-500 text-normal mt-1">Id Must be Unique</div>
-                                        <input className="text-md border-2 border-gray-200 mt-2 rounded-sm h-12 indent-2 mt-4" type="text" name="helper" placeholder="Helper" />
+                                        <input defaultValue={typeQuestion.helper_value} className="text-md border-2 border-gray-200 mt-2 rounded-sm h-12 indent-2 mt-4" type="text" name="helper" placeholder="Helper" />
                                         <div className="text-sm mt-3">
                                             <input className="mr-2" type="checkbox" />
                                             Required
