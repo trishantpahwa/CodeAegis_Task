@@ -27,7 +27,7 @@ export default function AddQuestionnaireView(props) {
                         </div>
                         <div className="flex">
                             <div className="w-full">
-                                <input name="name" onChange={props.handleQuestionChange} type="text" placeholder="Enter Title" className="mt-2 border-2 border-gray w-full rounded-sm" />
+                                <input name="name" onChange={props.handleQuestionChange} type="text" placeholder="Enter Title" className="mt-2 border-2 border-gray w-full rounded-sm" defaultValue={props.question.name} />
                             </div>
                             <div>
                                 <button className="border-2 border-red-300 h-7 w-7 flex justify-center mt-2 ml-2 rounded-sm">

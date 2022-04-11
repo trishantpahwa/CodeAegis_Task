@@ -33,7 +33,7 @@ export default function EditQuestionnaireView(props) {
                                 <p className="text-xl ml-1 -mt-1 text-red-500">*</p>
                             </div>
                             <div className="flex">
-                                <input defaultValue={props.question.name} className="w-4/5 border-2 border-gray h-10 mt-2 indent-2" type="text" placeholder="Enter Title" />
+                            <input name="name" onChange={props.handleQuestionChange} type="text" placeholder="Enter Title" className="mt-2 border-2 border-gray w-full rounded-sm" defaultValue={props.question.name} />
                                 <img className="h-10 ml-2 mt-2 border-2 border-red-500" src="https://freepikpsd.com/file/2020/12/delete-symbol-png-7.png" />
                             </div>
                             <div className="flex mt-4 mb-4">
@@ -46,13 +46,13 @@ export default function EditQuestionnaireView(props) {
                                         <div className="-mt-2 text-xl">
                                             {typeQuestion.name}
                                         </div>
-                                        <input className="text-md border-2 border-gray-200 mt-2 rounded-sm h-12 indent-2" type="text" name="question" placeholder="Question" defaultValue={typeQuestion.question_value} />
-                                        <input className="text-md border-2 border-gray-200 mt-2 rounded-sm h-12 indent-2" type="text" defaultValue={typeQuestion.id_value} name="id" placeholder="ID*" />
+                                        <input onChange={props.handleQuestionChange} name={"question_value-" + index.toString()} className="text-md border-2 border-gray-200 mt-2 rounded-sm h-12 indent-2" type="text" placeholder="Question" defaultValue={typeQuestion.question_value} />
+                                        <input className="text-md border-2 border-gray-200 mt-2 rounded-sm h-12 indent-2" type="text" defaultValue={typeQuestion.id_val} onChange={props.handleQuestionChange} name={"id_val-" + index.toString()} placeholder="ID*" />
                                         <div className="text-xs text-gray-500">An ID to reference the answer in the template</div>
                                         <div className="text-sm text-red-500 text-normal mt-1">Id Must be Unique</div>
-                                        <input defaultValue={typeQuestion.helper_value} className="text-md border-2 border-gray-200 mt-2 rounded-sm h-12 indent-2 mt-4" type="text" name="helper" placeholder="Helper" />
+                                        <input defaultValue={typeQuestion.helper_value} onChange={props.handleQuestionChange} name={"helper_value-" + index.toString()} className="text-md border-2 border-gray-200 mt-2 rounded-sm h-12 indent-2 mt-4" type="text" placeholder="Helper" />
                                         <div className="text-sm mt-3">
-                                            <input className="mr-2" type="checkbox" />
+                                            <input name={"isRequired-" + index.toString()} onChange={props.handleQuestionChange} defaultValue={typeQuestion.isRequired} className="mr-2" type="checkbox" />
                                             Required
                                         </div>
                                     </div>
@@ -78,6 +78,10 @@ export default function EditQuestionnaireView(props) {
                         </div>}
                     </div>
                 </div>
+            </div>
+            <div className="flex justify-end mt-20">
+                <button onClick={props.onDelete} className="bg-red-100 border-2 border-red-500 rounded-full p-1 w-40">Delete</button>
+                <button onClick={props.onSave} className="bg-teal-100 border-2 border-teal-500 rounded-full p-1 w-40 ml-4">Save</button>
             </div>
         </div>
     )

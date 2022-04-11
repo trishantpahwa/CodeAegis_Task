@@ -17,7 +17,7 @@ export default function SideMenuView(props) {
     return (
         <div className="w-60 h-full shadow-md bg-white px-1 absolute flex flex-col justify-between">
             <div>
-                <img src={`assets/logo.png`} className="w-full h-19 mt-3 mb-7" />
+                <img src={`assets/logo.png`} className="h-19 mt-3 mb-7" />
                 <ul className="relative">
                     {tiles.map((tile, index) => (
                         <MenuTile key={index} type={tile} active={tile === props.activeTile} />

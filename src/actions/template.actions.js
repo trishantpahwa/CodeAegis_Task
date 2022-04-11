@@ -113,12 +113,27 @@ const TemplateActions = {
     },
     saveQuestionnaire: (questionnaire) => {
         const request = () => ({ type: TemplateConstants.SAVE_QUESTIONNAIRE_REQUEST });
-        const success = (template, questionnaire) => ({ type: TemplateConstants.SAVE_QUESTIONNAIRE_SUCCESS, template, questionnaire });
+        const success = () => ({ type: TemplateConstants.SAVE_QUESTIONNAIRE_SUCCESS });
         const failure = () => ({ type: TemplateConstants.SAVE_QUESTIONNAIRE_FAILURE });
 
         return async (dispatch) => {
             dispatch(request());
             const response = await TemplateService.saveQuestionnaire(questionnaire);
+            if (response) {
+                dispatch(success());
+            } else {
+                dispatch(failure());
+            }
+        };
+    },
+    updateQuestionnaire: (questionnaire) => {
+        const request = () => ({ type: TemplateConstants.UPDATE_QUESTIONNAIRE_REQUEST });
+        const success = () => ({ type: TemplateConstants.UPDATE_QUESTIONNAIRE_SUCCESS });
+        const failure = () => ({ type: TemplateConstants.UPDATE_QUESTIONNAIRE_FAILURE });
+
+        return async (dispatch) => {
+            dispatch(request());
+            const response = await TemplateService.updateQuestionnaire(questionnaire);
             if (response) {
                 dispatch(success());
             } else {
