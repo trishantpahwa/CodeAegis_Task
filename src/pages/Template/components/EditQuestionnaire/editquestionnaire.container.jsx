@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { TemplateActions } from "../../../../actions";
 import EditQuestionnaireView from "./editquestionnaire.view";
@@ -6,6 +6,8 @@ import EditQuestionnaireView from "./editquestionnaire.view";
 export default function EditQuestionnaireConatainer(props) {
 
     const dispatch = useDispatch();
+
+    const categoriesRef = useRef(null);
 
     const categories = useSelector((state) => !!state && !!state.template && !!state.template.templates && !!state.template.templates.categories && state.template.templates.categories);
     const questionnaires = useSelector((state) => !!state && !!state.template && !!state.template.templates && !!state.template.templates.questionnaires && !!state.template.templates.questionnaires[props.template._id] && state.template.templates.questionnaires[props.template._id]) || [];
@@ -67,6 +69,7 @@ export default function EditQuestionnaireConatainer(props) {
             question: [],
             template_id: props.template._id
         });
+        setTypeQuestions([]);
     }
 
     const onSave = async () => {
@@ -79,6 +82,20 @@ export default function EditQuestionnaireConatainer(props) {
         dispatch(TemplateActions.getQuestionnaireCategories());
         dispatch(TemplateActions.getQuestionnaireFromTemplate(props.template._id));
     }, []);
+
+    useEffect(() => {
+        document.addEventListener("click", handleClickOutside, false);
+        return () => {
+            document.removeEventListener("click", handleClickOutside, false);
+        };
+    }, []);
+
+    const handleClickOutside = event => {
+        console.log()
+        if (categoriesRef.current && event.target.innerHTML != '+ Select By Categories' && !categoriesRef.current.contains(event.target)) {
+            setSelectingCategory(false);
+        }
+    };
 
     return (
         <div className="w-full">
@@ -95,6 +112,7 @@ export default function EditQuestionnaireConatainer(props) {
                 onSave={onSave}
                 handleQuestionChange={handleQuestionChange}
                 addSection={addSection}
+                categoriesRef={categoriesRef}
             />
         </div>
     )

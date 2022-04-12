@@ -33,7 +33,7 @@ export default function EditQuestionnaireView(props) {
                                 <p className="text-xl ml-1 -mt-1 text-red-500">*</p>
                             </div>
                             <div className="flex">
-                            <input name="name" onChange={props.handleQuestionChange} type="text" placeholder="Enter Title" className="mt-2 border-2 border-gray w-full rounded-sm" defaultValue={props.question.name} value={props.question.name} />
+                            <input name="name" onChange={props.handleQuestionChange} type="text" placeholder="Enter Title" className="mt-2 border-2 border-gray w-full rounded-sm" value={props.question.name} />
                                 <img className="h-10 ml-2 mt-2 border-2 border-red-500" src="https://freepikpsd.com/file/2020/12/delete-symbol-png-7.png" />
                             </div>
                             <div className="flex mt-4 mb-4">
@@ -69,7 +69,7 @@ export default function EditQuestionnaireView(props) {
                         <button onClick={props.onSelectCategory} className="relative bg-teal-500 h-9 p-1 w-48 text-white text-left rounded-md">
                             + Select By Categories
                         </button>
-                        {props.selectingCategory && <div className="border-2 border-gray-100 sticky ml-52 -mt-60">
+                        {props.selectingCategory && <div ref={props.categoriesRef} className="border-2 border-gray-100 sticky ml-52 -mt-60">
                             <ul className="bg-white overflow-scroll h-60 w-48 list-none">
                                 {props.categories.map((category, index) => (
                                     <li className="cursor-pointer" key={index} onClick={() => props.selectTypeQuestionsCategory(category)}>{category.name}</li>
