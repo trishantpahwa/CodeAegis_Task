@@ -91,7 +91,6 @@ export default function EditQuestionnaireConatainer(props) {
     }, []);
 
     const handleClickOutside = event => {
-        console.log()
         if (categoriesRef.current && event.target.innerHTML != '+ Select By Categories' && !categoriesRef.current.contains(event.target)) {
             setSelectingCategory(false);
         }

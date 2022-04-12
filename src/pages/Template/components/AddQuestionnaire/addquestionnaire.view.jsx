@@ -65,8 +65,8 @@ export default function AddQuestionnaireView(props) {
                             </div>
                         </div>
                         <div className="text-left mt-7 mb-5">
-                            <button onClick={props.onSelectCategory} className="rounded-md pl-2 pr-2 pt-1 pb-1 text-sm text-white bg-teal-500"> + Select by Categories</button>
-                            {props.selectingCategory && <div className="border-2 border-gray-100 sticky ml-52 -mt-60">
+                            <button onClick={props.onSelectCategory} className="rounded-md pl-2 pr-2 pt-1 pb-1 text-sm text-white bg-teal-500"> + Select By Categories</button>
+                            {props.selectingCategory && <div ref={props.categoriesRef} className="border-2 border-gray-100 sticky ml-52 -mt-60">
                                 <ul className="bg-white overflow-scroll h-60 w-48 list-none">
                                     {props.categories.map((category, index) => (
                                         <li className="cursor-pointer" key={index} onClick={() => props.selectTypeQuestionsCategory(category)}>{category.name}</li>

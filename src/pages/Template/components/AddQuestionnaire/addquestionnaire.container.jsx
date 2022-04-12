@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import AddQuestionnaireView from './addquestionnaire.view';
 import { TemplateActions } from '../../../../actions';
@@ -6,8 +6,11 @@ import { TemplateActions } from '../../../../actions';
 export default function AddQuestionnaireContainer(props) {
     const dispatch = useDispatch();
 
+    const categoriesRef = useRef(null);
+
     const [selectingCategory, setSelectingCategory] = useState(false);
     const [typeQuestions, setTypeQuestions] = useState([]);
+    const [formErrors, setFormErrors] = useState([]);
     const [question, setQuestion] = useState({
         name: "",
         question: [],
@@ -36,6 +39,17 @@ export default function AddQuestionnaireContainer(props) {
         setSelectingCategory(_selectingCategory => !_selectingCategory);
     }
 
+    const checkErrors = () => {
+        if (question.name === "" && !formErrors.includes("name cannot be empty")) setFormErrors((_formErrors => [..._formErrors, "name cannot be empty"]));
+        else setFormErrors(_formErrors => [..._formErrors.filter(f => f !== "name cannot be empty")]);
+        question.question.map((q) => {
+            ['question_value', 'id_val', 'helper_value'].map(_key => {
+                if (q[_key] === '' && !formErrors.includes(_key + " cannot be empty")) setFormErrors((_formErrors => [..._formErrors, _key + " cannot be empty"]))
+                else setFormErrors(_formErrors => [..._formErrors.filter(f => f !== _key + " cannot be empty")]);
+            });
+        });
+    }
+
     const selectTypeQuestionsCategory = (category) => {
         const _c = categories.filter(c => c._id === category._id)[0];
         setTypeQuestions(_typeQuestions => [..._typeQuestions, { name: _c.name, category_id: category._id, id_val: '', isRequired: false, question_value: '' }])
@@ -59,8 +73,17 @@ export default function AddQuestionnaireContainer(props) {
     }
 
     const onSave = () => {
-        dispatch(TemplateActions.saveQuestionnaire(question));
-        dispatch(TemplateActions.getQuestionnaireFromTemplate(props.templateID));
+        checkErrors();
+        if (formErrors.length === 0 && question.name !== '' && question.question.filter(_q => {
+            var flag = false;
+            ['question_value', 'helper_value', 'id_val'].map(_k => {
+                if (_q[_k] == '') flag = true;
+            });
+            return flag;
+        }).length === 0) {
+            dispatch(TemplateActions.saveQuestionnaire(question));
+            dispatch(TemplateActions.getQuestionnaireFromTemplate(props.templateID));
+        }
     }
 
     const addSection = () => {
@@ -69,12 +92,26 @@ export default function AddQuestionnaireContainer(props) {
             question: [],
             template_id: props.templateID,
         });
+        setTypeQuestions([]);
     }
 
     useEffect(() => {
         dispatch(TemplateActions.getQuestionnaireCategories());
         dispatch(TemplateActions.getQuestionnaireFromTemplate(props.templateID));
     }, []);
+
+    useEffect(() => {
+        document.addEventListener("click", handleClickOutside, false);
+        return () => {
+            document.removeEventListener("click", handleClickOutside, false);
+        };
+    }, []);
+
+    const handleClickOutside = event => {
+        if (categoriesRef.current && event.target.innerHTML.trim() != '+ Select By Categories' && !categoriesRef.current.contains(event.target)) {
+            setSelectingCategory(false);
+        }
+    };
 
     return (
         <div>
@@ -91,6 +128,7 @@ export default function AddQuestionnaireContainer(props) {
                 question={question}
                 handleQuestionChange={handleQuestionChange}
                 addSection={addSection}
+                categoriesRef={categoriesRef}
             />
         </div>
     )
